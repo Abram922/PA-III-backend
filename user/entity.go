@@ -1,16 +1,17 @@
 package user
 
 type User struct {
-	ID                          int
+	ID                      int
 	Email                   string
 	Password                string
 	Nama                    string
-	Jabatan_Terakhir        string
+	JabatanTerakhir        string
 	NIP                     int
-	Pendidikan_Terakhir     string
-	Mata_Kuliah_yang_Diampu string
-	Bidang_Ilmu             string
-	Role                    int
+	PendidikanTerakhir     string
+	MataKuliahyangDiampu string
+	BidangIlmu           string
+	Role                 int
+	AvatarFileName       string
 }
 
 type Role struct {

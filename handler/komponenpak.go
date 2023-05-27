@@ -4,6 +4,7 @@ import (
 	"PAK/helper"
 	"PAK/komponen"
 	"net/http"
+	"strconv"
 
 	"github.com/gin-gonic/gin"
 )
@@ -39,9 +40,23 @@ func (h *handlerpak) Create(c *gin.Context) {
 		return
 	}
 
-	formatter := komponen.FormatKompoenenPAK(newKomponen, "tokentokentoken")
+	formatter := komponen.FormatKompoenenPAK(newKomponen)
 
 	response := helper.ApiResponse("account has been registered", http.StatusOK, "success", formatter)
 	c.JSON(http.StatusOK, response)
 
+}
+
+func (h *handlerpak) GetKomponen(c *gin.Context) {
+	userID, _ := strconv.Atoi(c.Query("user_id"))
+
+	komponen, err := h.pakhandler.FindKomponenPAK(userID)
+	//service.FindCampaigns(userID)
+	if err != nil {
+		response := helper.ApiResponse("Error to get komponen pak", http.StatusBadRequest, "error", nil)
+		c.JSON(http.StatusBadRequest, response)
+		return
+	}
+	response := helper.ApiResponse("List of komponen pak", http.StatusOK, "success", komponen)
+	c.JSON(http.StatusOK, response)
 }

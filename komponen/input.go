@@ -1,6 +1,17 @@
 package komponen
 
+/*
+
+ID                  int
+	UserID              int
+	KomponenPAK         string
+	Kategori            string
+	BatasMaksimalDiakui string
+	Score               int
+*/
 type CreateKomponenPAK struct {
-	Judul     string `json:"judul" binding :"required"`
-	Deskripsi string `json:"deskripsi" binding :"required"`
+	KomponenPAK         string `json:"komponenpak" binding :"required"`
+	Kategori            string `json:"kategori" binding :"required"`
+	BatasMaksimalDiakui string `json:"batas_maksimal_diakui"`
+	Score               int    `json:"score"`
 }

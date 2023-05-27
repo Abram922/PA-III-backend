@@ -2,6 +2,7 @@ package komponen
 
 type Service interface {
 	Create(input CreateKomponenPAK) (Entity_pak, error)
+	FindKomponenPAK(UserID int) ([]Entity_pak, error)
 }
 
 type service struct {
@@ -16,8 +17,8 @@ func (s *service) Create(input CreateKomponenPAK) (Entity_pak, error) {
 
 	komponenpak := Entity_pak{}
 
-	komponenpak.Judul = input.Judul
-	komponenpak.Deskripsi = input.Deskripsi
+	//komponenpak.KomponenPAK = input.
+	//komponenpak.Deskripsi = input.Deskripsi
 
 	newKomponenPAK, err := s.repository.Save(komponenpak)
 
@@ -27,4 +28,22 @@ func (s *service) Create(input CreateKomponenPAK) (Entity_pak, error) {
 
 	return newKomponenPAK, nil
 
+}
+
+func (s *service) FindKomponenPAK(userID int) ([]Entity_pak, error) {
+	if userID != 0 {
+		komponen, err := s.repository.FindByUserID(userID)
+
+		if err != nil {
+			return komponen, err
+		}
+
+		return komponen, nil
+	}
+
+	komponen, err := s.repository.FindAll()
+	if err != nil {
+		return komponen, err
+	}
+	return komponen, nil
 }
