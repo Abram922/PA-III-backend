@@ -6,8 +6,6 @@ import (
 	"github.com/dgrijalva/jwt-go"
 )
 
-// membuat token
-
 type Service interface {
 	GenerateToken(userID int) (string, error)
 	ValidateToken(encodedToken string) (*jwt.Token, error)
@@ -20,7 +18,7 @@ func NewService() *jwtService {
 	return &jwtService{}
 }
 
-var SECRET_KEY = []byte("p3n14i4n_4ngk4_kr3d1t_2023")
+var SECRET_KEY = []byte("pseudocode")
 
 // data yang mau disisipkan adalah
 func (s *jwtService) GenerateToken(userID int) (string, error) {

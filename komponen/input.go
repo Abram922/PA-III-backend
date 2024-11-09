@@ -15,3 +15,5 @@ type CreateKomponenPAK struct {
 	BatasMaksimalDiakui string `json:"batas_maksimal_diakui"`
 	Score               int    `json:"score"`
 }
+
+

@@ -18,7 +18,7 @@ import (
 )
 
 func main() {
-	dsn := "root:@tcp(127.0.0.1:3306)/pak?charset=utf8mb4&parseTime=True&loc=Local" //memasukkan hak akses
+	dsn := "root:@tcp(127.0.0.1:3306)/simulasi_pak_new?charset=utf8mb4&parseTime=True&loc=Local" //memasukkan hak akses
 	db, err := gorm.Open(mysql.Open(dsn), &gorm.Config{})
 
 	if err != nil {
@@ -57,6 +57,8 @@ func main() {
 
 }
 
+// ambil nilai header authrization
+
 func authMiddleware(authService auth.Service, userService user.Service) gin.HandlerFunc {
 
 	return func(c *gin.Context) {
@@ -64,6 +66,7 @@ func authMiddleware(authService auth.Service, userService user.Service) gin.Hand
 
 		if !strings.Contains(authHeader, "Bearer") {
 			response := helper.ApiResponse("Unauthorized 1", http.StatusUnauthorized, "error", nil)
+			// Abort berfungsi menghentikan aktifitas pada service
 			c.AbortWithStatusJSON(http.StatusUnauthorized, response)
 			return
 		}
